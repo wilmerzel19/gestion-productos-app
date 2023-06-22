@@ -12,11 +12,11 @@ export default function Header({}: Props) {
   </div>  
   <div className="flex-none">
     <ul className="menu menu-horizontal  px-1 text-white">
-      <li><a>productos</a></li>
+      <li><a>Home</a></li>
       <li>
         <details>
           <summary>
-            Home
+            Productos
           </summary>
           <ul className="p-2 bg-slate-600 text-blue-900  ">
             <li><a>account</a></li>
