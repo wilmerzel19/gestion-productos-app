@@ -1,4 +1,5 @@
 
+import Enlace from './Enlace'
 import Logo from './Logo'
 
 type Props = {}
@@ -8,9 +9,9 @@ export default function Header({}: Props) {
 
     
 
-<div className="navbar bg-cyan-600">
+<div className="navbar flex justify-between  bg-cyan-600">
   <div className="flex-1">
-    <a className="btn btn-ghost normal-case text-xl"><Logo/>Productos</a>
+    <a className="btn btn-ghost normal-case text-xl"><Logo/>Gestion de productos</a>
   </div>
   <div className="flex-none">
     <div className="dropdown dropdown-end">
@@ -23,14 +24,12 @@ export default function Header({}: Props) {
         </div>
       </label>
       <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-        <li>
-          <a className="justify-between">
-            Profile
-          </a>
-        </li>
-        <li><a>Settings</a></li>
-        <li><a>Logout</a></li>
+     
+        <li><Enlace text='productos' route='/'  /></li>
+        <li><Enlace text='servicios' route='/servicios'  /></li>
+        <li><Enlace text='Contacto' route='/contacto'  /></li>
       </ul>
+ 
     </div>
   </div>
 </div>
