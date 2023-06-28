@@ -1,9 +1,10 @@
-import React from 'react'
 
-type Props = {}
 
-export default function Services({}: Props) {
+
+
+export default function Services() {
   return (
     <div>Services</div>
+    
   )
 }

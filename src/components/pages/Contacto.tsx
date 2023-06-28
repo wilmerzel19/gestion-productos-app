@@ -1,8 +1,6 @@
-import React from 'react'
 
-type Props = {}
 
-export default function Contacto({}: Props) {
+export default function Contacto() {
   return (
     <div>Contacto</div>
   )

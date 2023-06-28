@@ -1,139 +1,81 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
 
-type Props = {}
+import { Link } from "react-router-dom";
+import Button from "../layoust/Button";
 
-export default function Home({}: Props) {
+export default function Home() {
+  const [jsonData, setJsonData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    fetch('api/products/products.json')
+      .then(response => response.json())
+      .then(data => {
+        setJsonData(data);
+        setLoading(false);
+      })
+      .catch(error => {
+        console.error('Error al cargar el archivo JSON:', error);
+        setError(true);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) {
+    return <div>Cargando...</div>;
+  }
+
+  if (error) {
+    return <div>Error al cargar el archivo JSON</div>;
+  }
+
   return (
-<div className="overflow-x-auto">
-  <table className="table">
-    {/* head */}
-    <thead>
-      <tr>
-      
-        <th>Name</th>
-        <th>Job</th>
-        <th>Favorite Color</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      {/* row 1 */}
-      <tr>
-      
-        <td>
-          <div className="flex items-center space-x-3">
-            <div className="avatar">
-              <div className="mask mask-squircle w-12 h-12">
-                <img src="/tailwind-css-component-profile-2@56w.png" alt="Avatar Tailwind CSS Component" />
-              </div>
-            </div>
-            <div>
-              <div className="font-bold">Hart Hagerty</div>
-              <div className="text-sm opacity-50">United States</div>
-            </div>
-          </div>
-        </td>
-        <td>
-          Zemlak, Daniel and Leannon
-          <br/>
-          <span className="badge badge-ghost badge-sm">Desktop Support Technician</span>
-        </td>
-        <td>Purple</td>
-        <th>
-          <button className="btn btn-ghost btn-xs">details</button>
-        </th>
-      </tr>
-      {/* row 2 */}
-      <tr>
-     
-        <td>
-          <div className="flex items-center space-x-3">
-            <div className="avatar">
-              <div className="mask mask-squircle w-12 h-12">
-                <img src="/tailwind-css-component-profile-3@56w.png" alt="Avatar Tailwind CSS Component" />
-              </div>
-            </div>
-            <div>
-              <div className="font-bold">Brice Swyre</div>
-              <div className="text-sm opacity-50">China</div>
-            </div>
-          </div>
-        </td>
-        <td>
-          Carroll Group
-          <br/>
-          <span className="badge badge-ghost badge-sm">Tax Accountant</span>
-        </td>
-        <td>Red</td>
-        <th>
-          <button className="btn btn-ghost btn-xs">details</button>
-        </th>
-      </tr>
-      {/* row 3 */}
-      <tr>
-     
-        <td>
-          <div className="flex items-center space-x-3">
-            <div className="avatar">
-              <div className="mask mask-squircle w-12 h-12">
-                <img src="/tailwind-css-component-profile-4@56w.png" alt="Avatar Tailwind CSS Component" />
-              </div>
-            </div>
-            <div>
-              <div className="font-bold">Marjy Ferencz</div>
-              <div className="text-sm opacity-50">Russia</div>
-            </div>
-          </div>
-        </td>
-        <td>
-          Rowe-Schoen
-          <br/>
-          <span className="badge badge-ghost badge-sm">Office Assistant I</span>
-        </td>
-        <td>Crimson</td>
-        <th>
-          <button className="btn btn-ghost btn-xs">details</button>
-        </th>
-      </tr>
-      {/* row 4 */}
-      <tr>
- 
-        <td>
-          <div className="flex items-center space-x-3">
-            <div className="avatar">
-              <div className="mask mask-squircle w-12 h-12">
-                <img src="/tailwind-css-component-profile-5@56w.png" alt="Avatar Tailwind CSS Component" />
-              </div>
-            </div>
-            <div>
-              <div className="font-bold">Yancy Tear</div>
-              <div className="text-sm opacity-50">Brazil</div>
-            </div>
-          </div>
-        </td>
-        <td>
-          Wyman-Ledner
-          <br/>
-          <span className="badge badge-ghost badge-sm">Community Outreach Specialist</span>
-        </td>
-        <td>Indigo</td>
-        <th>
-          <button className="btn btn-ghost btn-xs">details</button>
-        </th>
-      </tr>
-    </tbody>
-    {/* foot */}
-    <tfoot>
-      <tr>
-        <th></th>
-        <th>Name</th>
-        <th>Job</th>
-        <th>Favorite Color</th>
-        <th></th>
-      </tr>
-    </tfoot>
-    
-  </table>
-</div>
-  )
+    <div className="overflow-x-auto">
+      <table className="table mt-10">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Precio</th>
+            <th>Acciones</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+        {jsonData && jsonData.map((item) => ( 
+            <tr key={item.id}>
+              <td>
+                <Link to="prueba">
+                  <div className="flex items-center space-x-3">
+                    <div className="avatar">
+                      <div className="mask mask-squircle w-12 h-12">
+                        <img src={item.imagen} alt="Avatar Tailwind CSS Component" />
+                      </div>
+                    </div>
+                    <div>
+                      <div className="font-bold">{item.nombre}</div>
+                      
+                      <div className="text-sm opacity-50">{item.descripcion}</div>
+                    </div>
+                  </div>
+                </Link>
+              </td>
+              <td>
+                {item.descripcion}
+                <br />
+                <span className="badge badge-ghost badge-sm">{item.nombre}</span>
+              </td>
+              <td>{item.precio}</td>
+             
+              <td>
+                <Button text="Editar" />
+                <Button text="Eliminar" />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
 }

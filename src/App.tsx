@@ -4,7 +4,7 @@ import { Route, Routes } from 'react-router-dom'
 import Header from './components/layoust/Header'
 import Home from './components/pages/Home';
 import Services from './components/pages/Services';
-import Contacto from './components/pages/contacto';
+import Contacto from './components/pages/Contacto';
 
 
 function App() {

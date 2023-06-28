@@ -1,20 +1,26 @@
 
+import { Link } from 'react-router-dom'
 import Enlace from './Enlace'
 import Logo from './Logo'
+import Button from './Button'
 
-type Props = {}
 
-export default function Header({}: Props) {
+export default function Header() {
   return (
 
     
 
 <div className="navbar flex justify-between  bg-cyan-600">
   <div className="flex-1">
-    <a className="btn btn-ghost normal-case text-xl"><Logo/>Gestion de productos</a>
+    <Link to="/">
+    <a className="btn btn-ghost normal-case text-lg"><Logo/>G.Productos</a>
+
+</Link>
   </div>
+  <Button text={'Crear'}/>
   <div className="flex-none">
     <div className="dropdown dropdown-end">
+    
      
     </div>
     <div className="dropdown dropdown-end">
