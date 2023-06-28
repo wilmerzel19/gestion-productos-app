@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 
 import { Link } from "react-router-dom";
 import Button from "../layoust/Button";
 
 export default function Home() {
-  const [jsonData, setJsonData] = useState(null);
+  const [jsonData, setJsonData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
@@ -43,7 +43,7 @@ export default function Home() {
           </tr>
         </thead>
         <tbody>
-        {jsonData && jsonData.map((item) => ( 
+          {jsonData.map((item:any) => (
             <tr key={item.id}>
               <td>
                 <Link to="prueba">
